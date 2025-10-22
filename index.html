@@ -135,6 +135,8 @@
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="text-2xl font-bold text-yellow-400">| DINITH |</div>
+
+        <!-- Desktop Menu -->
         <ul class="hidden md:flex space-x-8 text-yellow-400 font-medium">
           <li><a href="#home" class="hover:text-yellow-100">Home</a></li>
           <li><a href="#about" class="hover:text-yellow-100">About</a></li>
@@ -147,23 +149,25 @@
           </li>
           <li>
             <a href="#achievements" class="hover:text-yellow-100"
-              >Acheivements</a
+              >Achievements</a
             >
           </li>
           <li><a href="#blogs" class="hover:text-yellow-100">Blogs</a></li>
           <li><a href="#contact" class="hover:text-yellow-100">Contact</a></li>
         </ul>
 
+        <!-- Mobile Burger Button -->
         <div class="md:hidden">
-          <button id="mobile_menu_btn" class="text-yellow-400">☰</button>
+          <button id="mobile_menu_btn" class="text-yellow-400 text-2xl">
+            ☰
+          </button>
         </div>
       </div>
 
+      <!-- Mobile Menu -->
       <div id="mobile_menu" class="md:hidden hidden px-4 pb-4">
         <ul class="space-y-2 text-yellow-400 font-medium">
-          <li>
-            <a href="#home" class="block hover:text-yellow-100">Home</a>
-          </li>
+          <li><a href="#home" class="block hover:text-yellow-100">Home</a></li>
           <li>
             <a href="#about" class="block hover:text-yellow-100">About</a>
           </li>
@@ -180,7 +184,7 @@
           </li>
           <li>
             <a href="#achievements" class="block hover:text-yellow-100"
-              >Acheivements</a
+              >Achievements</a
             >
           </li>
           <li>
@@ -1719,11 +1723,19 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script>
-      const mobile_menu_btn = document.getElementById("mobile_menu_btn");
-      const mobile_menu = document.getElementById("mobile_menu");
+      const mobileMenuBtn = document.getElementById("mobile_menu_btn");
+      const mobileMenu = document.getElementById("mobile_menu");
 
-      mobile_menu_btn.addEventListener("click", () => {
-        mobile_menu.classList.toggle("hidden");
+      mobileMenuBtn.addEventListener("click", () => {
+        // Toggle visibility
+        mobileMenu.classList.toggle("hidden");
+
+        // Toggle icon (☰ <-> ✖)
+        if (mobileMenu.classList.contains("hidden")) {
+          mobileMenuBtn.textContent = "☰";
+        } else {
+          mobileMenuBtn.textContent = "✖";
+        }
       });
 
       const carousel = document.getElementById("carousel");
@@ -1850,4 +1862,3 @@
     </script>
   </body>
 </html>
-
