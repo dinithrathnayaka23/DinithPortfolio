@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ReactLenis } from "lenis/react";
 import ProfileScene from "@/components/profile-scene";
+import { Timeline } from "@/components/ui/timeline";
 import { StarfieldBackground } from "@/components/ui/starfield";
 import {
   ArrowUp,
@@ -133,101 +134,39 @@ const aboutCards = [
   },
 ];
 
-function useScrollProgress(targetRef) {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const updateProgress = () => {
-      const element = targetRef.current;
-      if (!element || typeof window === "undefined") {
-        return;
-      }
-
-      const rect = element.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const start = windowHeight * 0.9;
-      const end = -rect.height * 0.25;
-      const value = (start - rect.top) / (start - end);
-      setProgress(Math.max(0, Math.min(1, value)));
-    };
-
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, [targetRef]);
-
-  return progress;
-}
-
-function interpolate(progress, range, output) {
-  const [from, to] = range;
-  const [outFrom, outTo] = output;
-  if (progress <= from) return outFrom;
-  if (progress >= to) return outTo;
-  const t = (progress - from) / (to - from);
-  return outFrom + (outTo - outFrom) * t;
-}
-
-function StackingAboutCard({ item, progress, range, index }) {
-  const cardProgress = Math.max(0, Math.min(1, (progress - range[0]) / (range[1] - range[0])));
-  const translateY = interpolate(cardProgress, [0, 1], [80, index * 8]);
-  const translateX = interpolate(cardProgress, [0, 1], [index * 16, 0]);
-  const scale = interpolate(cardProgress, [0, 1], [0.97, 1]);
-  const opacity = interpolate(cardProgress, [0, 1], [0.7, 1]);
-  const rotate = interpolate(cardProgress, [0, 1], [index === 0 ? -1 : index === 1 ? -2.5 : 2.5, 0]);
-
+function AboutCard({ item }) {
   return (
-    <article
-      className="absolute left-1/2 top-0 -translate-x-1/2 w-full max-w-[460px] rounded-[36px] border border-white/10 bg-slate-900/95 p-8 shadow-[0_40px_100px_rgba(0,0,0,0.32)] backdrop-blur-2xl transition-all duration-500 ease-out"
-      style={{
-        zIndex: 40 - index,
-        top: index * 30,
-        transform: `translate(calc(-50% + ${translateX}px), ${translateY}px) scale(${scale}) rotate(${rotate}deg)`,
-        opacity,
-      }}
-    >
-      <div className="mb-5 flex items-center justify-between gap-4 rounded-[28px] bg-slate-800/95 px-5 py-4 ring-1 ring-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <article className="group relative isolate overflow-hidden rounded-3xl border border-white/10 bg-white/[0.015] px-6 py-7 shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+      {/* Dynamic hover background glow */}
+      <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${item.accent} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-[0.06]`} />
+      
+      {/* Decorative top highlight line */}
+      <div className="pointer-events-none absolute left-6 right-6 top-1 h-px bg-white/20 transition-all duration-300 group-hover:bg-white/40" />
+
+      <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Core skill</p>
-          <h3 className="mt-2 text-2xl font-semibold text-white">{item.title}</h3>
+          <p className="text-[10px] uppercase tracking-[0.24em] text-slate-400 font-extrabold">Core focus</p>
+          <h3 className="mt-1.5 text-2xl font-bold text-white tracking-tight group-hover:text-cyan-100 transition-colors duration-300">
+            {item.title}
+          </h3>
         </div>
-        <div className={`grid h-12 w-12 place-items-center rounded-3xl bg-gradient-to-r ${item.accent} text-white shadow-xl shadow-slate-950/30`}>
-          <item.icon size={18} />
+        <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${item.accent} text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+          <item.icon size={22} />
         </div>
       </div>
-      <p className="text-sm leading-7 text-slate-300">{item.text}</p>
+      <p className="text-sm sm:text-base leading-7 text-slate-300 font-medium">
+        {item.text}
+      </p>
     </article>
   );
 }
 
-function AboutStack({ items }) {
-  const sectionRef = useRef(null);
-  const progress = useScrollProgress(sectionRef);
-
+function AboutCardsList({ items }) {
   return (
-    <div ref={sectionRef} className="relative overflow-hidden rounded-[50px] border border-white/10 bg-slate-900/95 px-4 py-6 shadow-[0_50px_140px_rgba(0,0,0,0.28)] backdrop-blur-2xl lg:px-7 lg:py-8">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.14),_transparent_22%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.12),_transparent_22%)]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(15,23,42,0.95),transparent)]" />
-      <div className="relative mx-auto h-[520px] w-full max-w-[620px] lg:h-[540px]">
-        {items.map((item, index) => (
-          <StackingAboutCard
-            key={item.title}
-            item={item}
-            progress={progress}
-            range={[index * 0.18, index * 0.18 + 0.75]}
-            index={index}
-          />
-        ))}
-      </div>
-      <div className=" mt-6 grid gap-3 text-sm text-slate-400 sm:grid-cols-2">
-        <p className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3">Layered cards with soft shadow and motion.</p>
-        <p className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3">Visible at load, then stack as you scroll.</p>
-      </div>
+    <div className="grid gap-6">
+      {items.map((item) => (
+        <AboutCard key={item.title} item={item} />
+      ))}
     </div>
   );
 }
@@ -683,9 +622,7 @@ export default function PortfolioPage() {
             text="I enjoy collaborating with teams to ship useful software, exploring new tools, and turning ideas into clear, maintainable digital products."
           />
           <div className="relative grid gap-4" data-reveal>
-            <div className="lg:sticky lg:top-28">
-              <AboutStack items={aboutCards} />
-            </div>
+            <AboutCardsList items={aboutCards} />
           </div>
         </div>
       </section>
@@ -697,18 +634,25 @@ export default function PortfolioPage() {
             title="Learning path"
             text="A timeline from early academic milestones to current undergraduate work at the University of Moratuwa."
           />
-          <div className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:before:absolute lg:before:left-[5%] lg:before:right-[5%] lg:before:top-8 lg:before:h-px lg:before:bg-white/10">
-            {education.map((item, index) => (
-              <article className={`${cardClass} relative p-5`} key={item.title} data-reveal>
-                <span className="relative z-10 mb-6 grid h-10 w-10 place-items-center rounded-lg bg-amber-300 font-black text-neutral-950">
-                  {index + 1}
-                </span>
-                <p className="mb-2 font-extrabold text-teal-300">{item.time}</p>
-                <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
-                <span className="leading-7 text-slate-300">{item.detail}</span>
-              </article>
-            ))}
-          </div>
+        </div>
+        <div className="relative w-full mt-8 px-4 sm:px-8 max-w-6xl mx-auto">
+          <Timeline
+            data={education.map((item, index) => ({
+              title: item.time,
+              content: (
+                <article className="group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-white/[0.015] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20">
+                  {/* Decorative top line */}
+                  <div className="pointer-events-none absolute left-5 right-5 top-1 h-px bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
+                  {/* Index badge */}
+                  <span className="mb-4 inline-grid h-8 w-8 place-items-center rounded-lg bg-amber-300 text-xs font-black text-neutral-950 shadow-[0_0_16px_rgba(251,191,36,0.35)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mb-2 text-xl font-bold text-white tracking-tight">{item.title}</h3>
+                  <p className="text-sm sm:text-base leading-7 text-slate-300 font-medium">{item.detail}</p>
+                </article>
+              ),
+            }))}
+          />
         </div>
       </section>
 
