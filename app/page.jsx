@@ -79,37 +79,73 @@ const skills = [
     title: "Front-End",
     icon: Code2,
     iconClass: "text-teal-300",
-    items: ["React", "Next.js", "HTML5", "CSS3", "JavaScript"],
+    accent: "from-teal-500/10 to-cyan-500/10",
+    items: [
+      { name: "React",      logo: "https://cdn.simpleicons.org/react/61DAFB" },
+      { name: "Next.js",    logo: "https://cdn.simpleicons.org/nextdotjs/ffffff" },
+      { name: "HTML5",      logo: "https://cdn.simpleicons.org/html5/E34F26" },
+      { name: "CSS3",       logo: "https://cdn.simpleicons.org/css3/1572B6" },
+      { name: "JavaScript",logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+    ],
   },
   {
     title: "Back-End",
     icon: Server,
     iconClass: "text-amber-300",
-    items: ["Node.js", "Express.js", "PHP", "Laravel"],
+    accent: "from-amber-500/10 to-orange-500/10",
+    items: [
+      { name: "Node.js",   logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
+      { name: "Express",   logo: "https://cdn.simpleicons.org/express/ffffff" },
+      { name: "PHP",       logo: "https://cdn.simpleicons.org/php/777BB4" },
+      { name: "Laravel",   logo: "https://cdn.simpleicons.org/laravel/FF2D20" },
+    ],
   },
   {
     title: "Languages",
     icon: Brain,
     iconClass: "text-rose-300",
-    items: ["C", "C++", "Python", "Java"],
+    accent: "from-rose-500/10 to-pink-500/10",
+    items: [
+      { name: "C",      logo: "https://cdn.simpleicons.org/c/A8B9CC" },
+      { name: "C++",    logo: "https://cdn.simpleicons.org/cplusplus/00599C" },
+      { name: "Python", logo: "https://cdn.simpleicons.org/python/3776AB" },
+      { name: "Java",   logo: "https://cdn.simpleicons.org/openjdk/ED8B00" },
+    ],
   },
   {
     title: "Databases",
     icon: Database,
     iconClass: "text-violet-300",
-    items: ["MySQL", "MongoDB", "Firebase"],
+    accent: "from-violet-500/10 to-purple-500/10",
+    items: [
+      { name: "MySQL",    logo: "https://cdn.simpleicons.org/mysql/4479A1" },
+      { name: "MongoDB",  logo: "https://cdn.simpleicons.org/mongodb/47A248" },
+      { name: "Firebase", logo: "https://cdn.simpleicons.org/firebase/FFCA28" },
+    ],
   },
   {
     title: "Tools",
     icon: Wrench,
     iconClass: "text-emerald-300",
-    items: ["Figma", "Git", "VS Code", "Tailwind CSS"],
+    accent: "from-emerald-500/10 to-teal-500/10",
+    items: [
+      { name: "Figma",       logo: "https://cdn.simpleicons.org/figma/F24E1E" },
+      { name: "Git",         logo: "https://cdn.simpleicons.org/git/F05032" },
+      { name: "VS Code",     logo: "https://cdn.simpleicons.org/visualstudiocode/007ACC" },
+      { name: "Tailwind CSS",logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+    ],
   },
   {
     title: "Collaboration",
     icon: Users,
     iconClass: "text-sky-300",
-    items: ["Communication", "Leadership", "Teamwork", "Presentation"],
+    accent: "from-sky-500/10 to-blue-500/10",
+    items: [
+      { name: "Communication", logo: null },
+      { name: "Leadership",    logo: null },
+      { name: "Teamwork",      logo: null },
+      { name: "Presentation",  logo: null },
+    ],
   },
 ];
 
@@ -440,6 +476,7 @@ export default function PortfolioPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeAchievement, setActiveAchievement] = useState(0);
   const [showTop, setShowTop] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const revealItems = document.querySelectorAll("[data-reveal]");
@@ -457,7 +494,11 @@ export default function PortfolioPage() {
 
     revealItems.forEach((item) => observer.observe(item));
 
-    const onScroll = () => setShowTop(window.scrollY > 500);
+    const onScroll = () => {
+      setShowTop(window.scrollY > 500);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -667,19 +708,45 @@ export default function PortfolioPage() {
             {skills.map((group) => {
               const Icon = group.icon;
               return (
-                <article className={`${cardClass} p-5`} key={group.title} data-reveal>
+                <article
+                  className={`group relative isolate overflow-hidden ${cardClass} p-5`}
+                  key={group.title}
+                  data-reveal
+                >
+                  {/* Gradient hover glow */}
+                  <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${group.accent} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100`} />
+
                   <div className="mb-5 flex items-center gap-3">
-                    <Icon className={group.iconClass} size={24} />
+                    <Icon className={group.iconClass} size={22} />
                     <h3 className="text-lg font-bold">{group.title}</h3>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+
+                  <div className="flex flex-wrap gap-3">
                     {group.items.map((item) => (
-                      <span
-                        className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-sm text-slate-300"
-                        key={item}
+                      <div
+                        key={item.name}
+                        className="relative group/chip"
                       >
-                        {item}
-                      </span>
+                        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.08] hover:scale-105 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+                          {item.logo ? (
+                            <img
+                              src={item.logo}
+                              alt={item.name}
+                              width={18}
+                              height={18}
+                              className="h-[18px] w-[18px] object-contain"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/10 text-[9px] font-black text-slate-300">
+                              {item.name.slice(0, 2).toUpperCase()}
+                            </span>
+                          )}
+                          <span className="text-sm font-medium text-slate-300 whitespace-nowrap">
+                            {item.name}
+                          </span>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </article>
@@ -972,15 +1039,97 @@ export default function PortfolioPage() {
         </p>
       </footer>
 
+      {/* Hexagonal scroll-to-top button with scroll-progress border */}
       <button
-        className={`fixed bottom-5 right-5 z-30 grid h-11 w-11 place-items-center rounded-lg border-0 bg-amber-300 text-neutral-950 transition ${
-          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+        className={`fixed bottom-5 right-5 z-30 transition-all duration-500 group ${
+          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         }`}
         type="button"
         aria-label="Scroll to top"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
       >
-        <ArrowUp size={20} />
+        <svg
+          viewBox="0 0 56 64"
+          width="60"
+          height="68"
+          xmlns="http://www.w3.org/2000/svg"
+          overflow="visible"
+        >
+          <defs>
+            <linearGradient id="hexGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#2dd4bf" />
+              <stop offset="100%" stopColor="#38bdf8" />
+            </linearGradient>
+            {/* Glow filter */}
+            <filter id="hexGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Dark glassmorphic background */}
+          <polygon
+            points="28,3 53,17.5 53,46.5 28,61 3,46.5 3,17.5"
+            fill="#0d1929"
+            stroke="rgba(255,255,255,0.1)"
+            strokeWidth="1"
+          />
+
+          {/* Subtle inner highlight at top */}
+          <polygon
+            points="28,3 53,17.5 53,46.5 28,61 3,46.5 3,17.5"
+            fill="none"
+            stroke="rgba(255,255,255,0.04)"
+            strokeWidth="6"
+            strokeDasharray="30 150"
+            strokeDashoffset="-12"
+          />
+
+          {/* Progress track — dim teal outline */}
+          <polygon
+            points="28,3 53,17.5 53,46.5 28,61 3,46.5 3,17.5"
+            fill="none"
+            stroke="rgba(45,212,191,0.12)"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+          />
+
+          {/* Animated progress stroke that fills clockwise as you scroll */}
+          <polygon
+            points="28,3 53,17.5 53,46.5 28,61 3,46.5 3,17.5"
+            fill="none"
+            stroke="url(#hexGrad)"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeDasharray="180"
+            strokeDashoffset={180 - scrollProgress * 180}
+            filter="url(#hexGlow)"
+            style={{ transition: "stroke-dashoffset 0.12s linear" }}
+          />
+
+          {/* Upward arrow icon */}
+          <line
+            x1="28" y1="38" x2="28" y2="24"
+            stroke="#e2e8f0"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className="transition-transform duration-300 group-hover:-translate-y-1"
+            style={{ transition: "transform 0.2s ease" }}
+          />
+          <polyline
+            points="21,31 28,24 35,31"
+            fill="none"
+            stroke="#e2e8f0"
+            strokeWidth="2.2"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+        </svg>
       </button>
       </div>
     </main>
