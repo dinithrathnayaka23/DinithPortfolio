@@ -11,15 +11,12 @@ import {
   AtSign,
   BookOpen,
   Brain,
-  BriefcaseBusiness,
-  Camera,
   ChevronLeft,
   ChevronRight,
   Code2,
   Cpu,
   Database,
   ExternalLink,
-  Globe,
   Mail,
   Menu,
   Phone,
@@ -31,6 +28,72 @@ import {
   Wrench,
   X,
 } from "lucide-react";
+
+function GitHubIcon({ size = 20, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18A11.1 11.1 0 0 1 12 5.49c.98 0 1.96.13 2.88.39 2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.79.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ size = 20, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M5.32 3.9a2.33 2.33 0 1 1-4.66 0 2.33 2.33 0 0 1 4.66 0ZM4.93 8.05H1.05V23h3.88V8.05ZM11.13 8.05H7.41V23h3.72v-7.4c0-1.95.37-3.84 2.79-3.84 2.38 0 2.41 2.23 2.41 3.96V23h3.88v-8.21c0-4.03-.87-7.13-5.58-7.13a4.88 4.88 0 0 0-4.39 2.41h-.05V8.05h-.06Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ size = 20, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect height="18" rx="5" stroke="currentColor" strokeWidth="2" width="18" x="3" y="3" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+      <circle cx="17.4" cy="6.6" fill="currentColor" r="1.2" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ size = 20, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.77l-.44 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06Z" />
+    </svg>
+  );
+}
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -351,13 +414,13 @@ const contacts = [
     label: "GitHub",
     value: "github.com/dinithrathnayaka23",
     href: "https://github.com/dinithrathnayaka23",
-    icon: Code2,
+    icon: GitHubIcon,
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/dinithrathnayaka",
     href: "https://www.linkedin.com/in/dinithrathnayaka/",
-    icon: BriefcaseBusiness,
+    icon: LinkedInIcon,
   },
   {
     label: "Email",
@@ -375,13 +438,13 @@ const contacts = [
     label: "Instagram",
     value: "@dinithrathanayaka23",
     href: "https://www.instagram.com/dinithrathanayaka23/?hl=en",
-    icon: Camera,
+    icon: InstagramIcon,
   },
   {
     label: "Facebook",
     value: "facebook.com/dinith.rathnayaka",
     href: "https://www.facebook.com/dinith.rathnayaka.2025",
-    icon: Globe,
+    icon: FacebookIcon,
   },
 ];
 
@@ -763,36 +826,38 @@ export default function PortfolioPage() {
             title="Selected work"
             text="A mix of web interfaces, IoT dashboards, product prototypes, and active concepts."
           />
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <article
-                className={`${cardClass} grid min-h-80 overflow-hidden md:grid-cols-[0.9fr_1.1fr]`}
+                className="animated-glass-border group relative isolate flex min-h-[360px] flex-col overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(45deg,#080b11,rgba(30,41,59,0.94)_50%,#172033)] p-6 shadow-[0_18px_70px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_90px_rgba(50,167,255,0.16)]"
                 key={project.title}
                 data-reveal
               >
-                <div className="min-h-[232px] bg-slate-700 md:min-h-full">
-                  <img
-                    className="h-full min-h-[232px] w-full object-cover md:min-h-80"
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    loading="lazy"
-                  />
+                <div className="pointer-events-none absolute inset-x-6 top-1 h-px bg-white/20 transition-colors duration-300 group-hover:bg-white/40" />
+                <div className="mb-6 flex items-start justify-between gap-4">
+                  <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-slate-300">
+                    Project
+                  </span>
+                  <span
+                    className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-black ${
+                      project.status === "Completed"
+                        ? "bg-emerald-300/15 text-emerald-300"
+                        : "bg-amber-300/15 text-amber-300"
+                    }`}
+                  >
+                    {project.status}
+                  </span>
                 </div>
-                <div className="flex flex-col p-6">
-                  <div className="mb-3 grid grid-cols-[1fr_auto] items-start gap-3">
-                    <h3 className="text-lg font-bold">{project.title}</h3>
-                    <span
-                      className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-black ${
-                        project.status === "Completed"
-                          ? "bg-emerald-300/15 text-emerald-300"
-                          : "bg-amber-300/15 text-amber-300"
-                      }`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-                  <p className="leading-7 text-slate-300">{project.description}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
+
+                <div className="flex flex-1 flex-col text-center">
+                  <h3 className="text-xl font-semibold tracking-tight text-white">
+                    {project.title}
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-[28rem] leading-7 text-slate-300">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap justify-center gap-2">
                     {project.stack.map((item) => (
                       <span
                         className="rounded-full border border-white/10 bg-white/[0.045] px-2.5 py-1.5 text-xs text-slate-300"
@@ -802,12 +867,13 @@ export default function PortfolioPage() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-auto flex flex-wrap gap-2 pt-6">
+
+                  <div className="mt-auto flex flex-wrap justify-center gap-2 pt-8">
                     <ExternalButton href={project.repo} variant="ghost">
-                      <Code2 size={17} /> Code
+                      <GitHubIcon size={17} /> GitHub
                     </ExternalButton>
                     <ExternalButton href={project.live} variant="primary">
-                      <ExternalLink size={17} /> Live
+                      <ExternalLink size={17} /> Live Demo
                     </ExternalButton>
                   </div>
                 </div>
@@ -824,50 +890,132 @@ export default function PortfolioPage() {
             title="Competitions and showcases"
             text="Public speaking, coding, startup ideation, and technology exhibition experiences."
           />
-          <div className={`${cardClass} mt-10 grid overflow-hidden lg:grid-cols-2`} data-reveal>
-            <div className="min-h-[280px] bg-slate-700 sm:min-h-[340px] lg:min-h-[420px]">
-              <img
-                className="h-full min-h-[280px] w-full object-cover sm:min-h-[340px] lg:min-h-[420px]"
-                src={currentAchievement.image}
-                alt={currentAchievement.title}
-                loading="lazy"
-                key={currentAchievement.image}
-              />
-            </div>
-            <div className="flex flex-col justify-center p-6 sm:p-9">
-              <p className="mb-3 font-black text-teal-300">
-                {activeAchievement + 1} / {achievements.length}
-              </p>
-              <h3 className="mb-3 text-2xl font-bold">{currentAchievement.title}</h3>
-              <span className="leading-7 text-slate-300">{currentAchievement.detail}</span>
-              <div className="mt-8 flex items-center gap-4">
-                <button
-                  className={iconButtonClass}
-                  type="button"
-                  aria-label="Previous achievement"
-                  onClick={() => goToAchievement(-1)}
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <div className="flex gap-2" aria-hidden="true">
-                  {achievements.map((item, index) => (
-                    <span
-                      key={item.title}
-                      className={`h-2.5 rounded-full transition-all ${
-                        index === activeAchievement ? "w-7 bg-amber-300" : "w-2.5 bg-slate-500"
-                      }`}
-                    />
-                  ))}
+          <div className="mt-10 grid gap-5 xl:grid-cols-[minmax(0,1.28fr)_minmax(300px,0.72fr)]" data-reveal>
+            <article className="animated-glass-border group relative isolate overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(45deg,#080b11,rgba(30,41,59,0.94)_52%,#172033)] shadow-[0_22px_80px_rgba(0,0,0,0.32)]">
+              <div className="relative h-[330px] overflow-hidden bg-slate-950 sm:h-[440px] lg:h-[520px]">
+                <img
+                  className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-2xl"
+                  src={currentAchievement.image}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  key={`${currentAchievement.image}-backdrop`}
+                />
+                <img
+                  className="achievement-visual relative z-10 h-full w-full object-contain object-top"
+                  src={currentAchievement.image}
+                  alt={currentAchievement.title}
+                  loading="lazy"
+                  key={currentAchievement.image}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,17,0)_58%,rgba(8,11,17,0.62)_100%)]" />
+                <div className="absolute left-5 top-5 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 text-xs font-black text-white backdrop-blur-xl">
+                  {String(activeAchievement + 1).padStart(2, "0")}
                 </div>
-                <button
-                  className={iconButtonClass}
-                  type="button"
-                  aria-label="Next achievement"
-                  onClick={() => goToAchievement(1)}
-                >
-                  <ChevronRight size={20} />
-                </button>
               </div>
+
+              <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                <div>
+                  <div className="mb-5 flex flex-wrap items-center gap-3">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200/15 bg-cyan-300/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-cyan-200">
+                      <Sparkles size={14} /> Spotlight
+                    </span>
+                    <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-black text-slate-300">
+                      {activeAchievement + 1} / {achievements.length}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                    {currentAchievement.title}
+                  </h3>
+                  <p className="mt-4 max-w-xl leading-7 text-slate-300">
+                    {currentAchievement.detail}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4 lg:min-w-[260px] lg:justify-end">
+                  <div className="flex items-center gap-3">
+                    <button
+                      className={iconButtonClass}
+                      type="button"
+                      aria-label="Previous achievement"
+                      onClick={() => goToAchievement(-1)}
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button
+                      className={iconButtonClass}
+                      type="button"
+                      aria-label="Next achievement"
+                      onClick={() => goToAchievement(1)}
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </div>
+                  <div className="flex min-w-[160px] flex-1 gap-2 lg:flex-none lg:w-36" aria-hidden="true">
+                    {achievements.map((item, index) => (
+                      <span
+                        key={item.title}
+                        className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10"
+                      >
+                        <span
+                          className={`block h-full rounded-full bg-gradient-to-r from-cyan-300 to-amber-300 transition-all duration-500 ${
+                            index === activeAchievement ? "w-full" : "w-0"
+                          }`}
+                        />
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1" aria-label="Achievement selector">
+              {achievements.map((item, index) => {
+                const isActive = index === activeAchievement;
+
+                return (
+                  <button
+                    className={`group relative grid w-full grid-cols-[64px_1fr_auto] items-center gap-4 overflow-hidden rounded-2xl border p-3 text-left transition-all duration-300 ${
+                      isActive
+                        ? "border-cyan-200/35 bg-cyan-300/10 shadow-[0_18px_50px_rgba(50,167,255,0.12)]"
+                        : "border-white/10 bg-white/[0.025] hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.055]"
+                    }`}
+                    type="button"
+                    aria-pressed={isActive}
+                    onClick={() => setActiveAchievement(index)}
+                    key={item.title}
+                  >
+                    <span className="relative h-16 w-16 overflow-hidden rounded-xl bg-slate-800">
+                      <img
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        src={item.image}
+                        alt=""
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                        Milestone {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="mt-1 block text-sm font-bold leading-5 text-white">
+                        {item.title}
+                      </span>
+                    </span>
+                    <span
+                      className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                        isActive ? "bg-cyan-200 shadow-[0_0_18px_rgba(165,243,252,0.8)]" : "bg-slate-600"
+                      }`}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`absolute bottom-0 left-0 h-px bg-gradient-to-r from-cyan-300 via-indigo-300 to-amber-300 transition-all duration-500 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -882,24 +1030,37 @@ export default function PortfolioPage() {
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog) => (
-              <article className={`${cardClass} overflow-hidden`} key={blog.href} data-reveal>
-                <img
-                  className="h-48 w-full bg-slate-700 object-cover"
-                  src={blog.image}
-                  alt={`${blog.title} cover`}
-                  loading="lazy"
-                />
-                <div className="p-5">
-                  <h3 className="mb-3 text-lg font-bold">{blog.title}</h3>
-                  <p className="mb-4 leading-7 text-slate-300">{blog.description}</p>
-                  <a
-                    className="inline-flex items-center gap-2 font-bold text-amber-300"
-                    href={blog.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Read More <ArrowUpRight size={16} />
-                  </a>
+              <article
+                className="animated-glass-border group relative isolate flex h-full min-h-[430px] flex-col overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(45deg,#080b11,rgba(30,41,59,0.94)_50%,#172033)] shadow-[0_18px_70px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_90px_rgba(50,167,255,0.14)]"
+                key={blog.href}
+                data-reveal
+              >
+                <div className="relative h-48 overflow-hidden bg-slate-900">
+                  <img
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={blog.image}
+                    alt={`${blog.title} cover`}
+                    loading="lazy"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,17,0)_45%,rgba(8,11,17,0.72)_100%)]" />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-slate-200 backdrop-blur-xl">
+                    Article
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="text-lg font-bold leading-7 text-white">{blog.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-300">{blog.description}</p>
+                  <div className="mt-auto pt-6">
+                    <RotatingGradientButton
+                      className="w-fit"
+                      href={blog.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="ghost"
+                    >
+                      Read Article <ArrowUpRight size={17} />
+                    </RotatingGradientButton>
+                  </div>
                 </div>
               </article>
             ))}
@@ -987,56 +1148,91 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <footer className="bg-[#0a0b0e] py-10">
-        <div className={`${containerClass} grid items-start gap-7 lg:grid-cols-[1.2fr_1fr_auto]`}>
-          <div>
-            <strong>Dinith Rathnayaka</strong>
-            <p className="mt-2 leading-7 text-slate-300">
-              Full-stack developer creating modern, practical digital experiences.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {navItems.slice(0, 5).map((item) => (
-              <a
-                className="text-sm text-slate-300 transition hover:text-amber-300"
-                key={item.href}
-                href={item.href}
-              >
-                {item.label}
+      <footer className="relative border-t border-white/5 bg-[#080b11] py-10 sm:py-14">
+        <div className={containerClass}>
+          <div className="animated-glass-border relative isolate overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(45deg,#080b11,rgba(30,41,59,0.94)_52%,#172033)] p-6 shadow-[0_22px_80px_rgba(0,0,0,0.32)] sm:p-8">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr_auto] lg:items-start">
+              <div>
+                <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-200/15 bg-cyan-300/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-cyan-200">
+                  <Sparkles size={14} /> Portfolio
+                </span>
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  Dinith Rathnayaka
+                </h2>
+                <p className="mt-3 max-w-md leading-7 text-slate-300">
+                  Full-stack developer creating modern, practical digital experiences across web,
+                  IoT, and product-focused interfaces.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <RotatingGradientButton href="#contact">
+                    Contact Me <Send size={17} />
+                  </RotatingGradientButton>
+                  <RotatingGradientButton href="#projects" variant="ghost">
+                    View Work <ArrowUpRight size={17} />
+                  </RotatingGradientButton>
+                </div>
+              </div>
+
+              <nav aria-label="Footer navigation">
+                <p className="mb-3 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  Explore
+                </p>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
+                  {navItems.map((item) => (
+                    <a
+                      className="rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-sm font-bold text-slate-300 transition hover:-translate-y-0.5 hover:border-cyan-200/35 hover:bg-white/[0.07] hover:text-white"
+                      key={item.href}
+                      href={item.href}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+
+              <div className="lg:min-w-52 lg:justify-self-end">
+                <p className="mb-3 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  Connect
+                </p>
+                <div className="flex flex-wrap gap-3 lg:justify-end">
+                  {contacts
+                    .filter((contact) =>
+                      ["GitHub", "LinkedIn", "Instagram", "Facebook"].includes(contact.label)
+                    )
+                    .map((contact) => {
+                      const Icon = contact.icon;
+
+                      return (
+                        <a
+                          className={liquidIconButtonClass}
+                          href={contact.href}
+                          aria-label={contact.label}
+                          target="_blank"
+                          rel="noreferrer"
+                          key={contact.label}
+                        >
+                          <Icon size={20} />
+                        </a>
+                      );
+                    })}
+                </div>
+                <a
+                  className="mt-4 inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-sm font-bold text-slate-300 transition hover:-translate-y-0.5 hover:border-amber-300/60 hover:text-white"
+                  href="mailto:dinithoshada2003@gmail.com"
+                >
+                  <Mail size={17} /> Email me
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-5 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+              <p>&copy; {new Date().getFullYear()} Dinith Rathnayaka. All rights reserved.</p>
+              <a className="inline-flex items-center gap-2 font-bold text-slate-400 transition hover:text-cyan-200" href="#home">
+                Back to top <ArrowUp size={16} />
               </a>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a
-              className={iconButtonClass}
-              href="https://github.com/dinithrathnayaka23"
-              aria-label="GitHub"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Code2 size={20} />
-            </a>
-            <a
-              className={iconButtonClass}
-              href="https://www.linkedin.com/in/dinithrathnayaka/"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <BriefcaseBusiness size={20} />
-            </a>
-            <a
-              className={iconButtonClass}
-              href="mailto:dinithoshada2003@gmail.com"
-              aria-label="Email"
-            >
-              <Mail size={20} />
-            </a>
+            </div>
           </div>
         </div>
-        <p className={`${containerClass} mt-8 text-sm text-slate-500`}>
-          &copy; {new Date().getFullYear()} Dinith Rathnayaka. All rights reserved.
-        </p>
       </footer>
 
       {/* Hexagonal scroll-to-top button with scroll-progress border */}
