@@ -1,0 +1,181 @@
+"use client";
+import { useEffect, useRef } from "react"
+import { cn } from "@/lib/utils"
+
+export function StarfieldBackground({
+  className,
+  children,
+  count = 400,
+  speed = 0.5,
+  starColor = "#d9f6ff",
+  accentColor = "#32a7ff",
+  secondaryColor = "#f8c24e",
+  fadeColor = "rgba(15, 17, 21, 0.22)",
+  backgroundColor = "#0f1115",
+  twinkle = true
+}) {
+  const canvasRef = useRef(null)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const container = containerRef.current
+    if (!canvas || !container) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const rect = container.getBoundingClientRect()
+    let width = rect.width
+    let height = rect.height
+    canvas.width = width
+    canvas.height = height
+
+    let animationId
+    let tick = 0
+
+    const _centerX = width / 2
+    const _centerY = height / 2
+    const maxDepth = 1500
+
+    // Create stars
+    const createStar = initialZ => ({
+      x: (Math.random() - 0.5) * width * 2,
+      y: (Math.random() - 0.5) * height * 2,
+      z: initialZ ?? Math.random() * maxDepth,
+      color:
+        Math.random() > 0.86
+          ? secondaryColor
+          : Math.random() > 0.46
+            ? accentColor
+            : starColor,
+      twinkleSpeed: Math.random() * 0.02 + 0.01,
+      twinkleOffset: Math.random() * Math.PI * 2
+    })
+
+    const stars = Array.from({ length: count }, () => createStar())
+
+    // Resize handler
+    const handleResize = () => {
+      const rect = container.getBoundingClientRect()
+      width = rect.width
+      height = rect.height
+      canvas.width = width
+      canvas.height = height
+    }
+
+    const ro = new ResizeObserver(handleResize)
+    ro.observe(container)
+
+    // Animation
+    const animate = () => {
+      tick++
+
+      // Fade effect for trails
+      ctx.fillStyle = fadeColor
+      ctx.fillRect(0, 0, width, height)
+
+      const cx = width / 2
+      const cy = height / 2
+
+      for (const star of stars) {
+        // Move star toward camera
+        star.z -= speed * 2
+
+        // Reset if passed camera
+        if (star.z <= 0) {
+          star.x = (Math.random() - 0.5) * width * 2
+          star.y = (Math.random() - 0.5) * height * 2
+          star.z = maxDepth
+        }
+
+        // Project to 2D
+        const scale = 400 / star.z
+        const x = cx + star.x * scale
+        const y = cy + star.y * scale
+
+        // Skip if off screen
+        if (x < -10 || x > width + 10 || y < -10 || y > height + 10) continue
+
+        // Size based on depth (closer = bigger)
+        const size = Math.max(0.5, (1 - star.z / maxDepth) * 3)
+
+        // Opacity based on depth (closer = brighter)
+        let opacity = (1 - star.z / maxDepth) * 0.9 + 0.1
+
+        // Twinkle effect
+        if (twinkle && star.twinkleSpeed > 0.015) {
+          opacity *= 0.7 + 0.3 * Math.sin(tick * star.twinkleSpeed + star.twinkleOffset)
+        }
+
+        // Draw star
+        ctx.beginPath()
+        ctx.arc(x, y, size, 0, Math.PI * 2)
+        ctx.fillStyle = star.color
+        ctx.globalAlpha = opacity
+        ctx.fill()
+
+        // Draw subtle streak for fast/close stars
+        if (star.z < maxDepth * 0.3 && speed > 0.3) {
+          const streakLength = (1 - star.z / maxDepth) * speed * 8
+          const angle = Math.atan2(star.y, star.x)
+          ctx.beginPath()
+          ctx.moveTo(x, y)
+          ctx.lineTo(x - Math.cos(angle) * streakLength, y - Math.sin(angle) * streakLength)
+          ctx.strokeStyle = star.color
+          ctx.globalAlpha = opacity * 0.3
+          ctx.lineWidth = size * 0.5
+          ctx.stroke()
+        }
+      }
+
+      ctx.globalAlpha = 1
+      animationId = requestAnimationFrame(animate)
+    }
+
+    // Initial clear
+    ctx.fillStyle = backgroundColor
+    ctx.fillRect(0, 0, width, height)
+
+    animationId = requestAnimationFrame(animate)
+
+    return () => {
+      cancelAnimationFrame(animationId)
+      ro.disconnect()
+    };
+  }, [accentColor, backgroundColor, count, fadeColor, secondaryColor, speed, starColor, twinkle])
+
+  return (
+    <div
+      ref={containerRef}
+      data-starfield-background
+      aria-hidden={children ? undefined : true}
+      className={cn("fixed inset-0 overflow-hidden bg-[#0f1115]", className)}>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full"
+      />
+      {/* Theme-matched nebula glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          background:
+            "radial-gradient(ellipse at 22% 24%, rgba(50, 167, 255, 0.18) 0%, transparent 48%), radial-gradient(ellipse at 78% 34%, rgba(191, 165, 255, 0.12) 0%, transparent 46%), radial-gradient(ellipse at 55% 82%, rgba(248, 194, 78, 0.08) 0%, transparent 48%)",
+        }} />
+      {/* Vignette */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(5,5,10,0.9) 100%)",
+        }} />
+      {/* Content layer */}
+      {children && <div className="relative z-10 h-full w-full">{children}</div>}
+    </div>
+  );
+}
+
+export default function StarfieldBackgroundDemo() {
+  return <StarfieldBackground />;
+}
