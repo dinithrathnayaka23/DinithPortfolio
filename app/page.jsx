@@ -16,6 +16,7 @@ import {
   Code2,
   Cpu,
   Database,
+  Download,
   ExternalLink,
   Mail,
   Menu,
@@ -107,7 +108,7 @@ const navItems = [
 ];
 
 const highlights = [
-  { value: "3.82", label: "Current CGPA" },
+  { value: "3.89", label: "Current CGPA" },
   { value: "7", label: "Featured projects" },
   { value: "6", label: "Technical articles" },
   { value: "5", label: "Events and showcases" },
@@ -133,7 +134,7 @@ const education = [
     title: "University of Moratuwa",
     time: "2024 - Present",
     detail:
-      "Pursuing a BSc in Information Technology and Management while maintaining a 3.82 CGPA.",
+      "Pursuing a BSc in Information Technology and Management while maintaining a 3.89 CGPA.",
   },
 ];
 
@@ -147,8 +148,7 @@ const skills = [
       { name: "React",      logo: "https://cdn.simpleicons.org/react/61DAFB" },
       { name: "Next.js",    logo: "https://cdn.simpleicons.org/nextdotjs/ffffff" },
       { name: "HTML5",      logo: "https://cdn.simpleicons.org/html5/E34F26" },
-      { name: "CSS3",       logo: "https://cdn.simpleicons.org/css3/1572B6" },
-      { name: "JavaScript",logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+      { name: "CSS3",       logo: "https://cdn.simpleicons.org/css3/1572B6" }
     ],
   },
   {
@@ -173,6 +173,7 @@ const skills = [
       { name: "C++",    logo: "https://cdn.simpleicons.org/cplusplus/00599C" },
       { name: "Python", logo: "https://cdn.simpleicons.org/python/3776AB" },
       { name: "Java",   logo: "https://cdn.simpleicons.org/openjdk/ED8B00" },
+      { name: "JavaScript",logo: "https://cdn.simpleicons.org/javascript/F7DF1E" }
     ],
   },
   {
@@ -448,6 +449,8 @@ const contacts = [
   },
 ];
 
+const cvFile = "/Dinith_Rathnayaka_CV.pdf";
+
 const containerClass = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 const sectionClass = "border-b border-white/5 py-16 sm:py-24";
 const cardClass =
@@ -484,6 +487,7 @@ function SectionHeader({ eyebrow, title, text }) {
 function RotatingGradientButton({
   children,
   className = "",
+  download,
   href,
   rel,
   target,
@@ -505,7 +509,13 @@ function RotatingGradientButton({
 
   if (href) {
     return (
-      <a className={`${gradientButtonShell} ${className}`} href={href} rel={rel} target={target}>
+      <a
+        className={`${gradientButtonShell} ${className}`}
+        download={download}
+        href={href}
+        rel={rel}
+        target={target}
+      >
         {content}
       </a>
     );
@@ -675,16 +685,25 @@ export default function PortfolioPage() {
             <h1 className="mb-5 text-5xl font-black leading-none sm:text-6xl lg:text-7xl">
               Dinith Rathnayaka
             </h1>
-            <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              Full-stack developer and technical writer building practical web, IoT, and software
-              experiences with React, Node.js, and a steady curiosity for better systems.
+            <p className="max-w-2xl text-justify leading-8 text-slate-300 sm:text-lg">
+              Passionate and self motivated software developer with builder mindset and passion for creating
+              technology that solves real world problems. Thrives on understanding the pain points of users and
+              building effective consumer-centric solutions that make a difference.Recognized for excellent
+              communication skills, adaptability and a continuous learning attitude, with a passion for exploring new
+              technologies and research areas. I have a passion for building scalable, practical and thoughtful
+              software that makes people's everyday experiences better.
+              
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <RotatingGradientButton href="#projects">
                 View Work <ArrowUpRight size={18} />
               </RotatingGradientButton>
-              <RotatingGradientButton href="#contact" variant="ghost">
-                Contact Me <Mail size={18} />
+              <RotatingGradientButton
+                href={cvFile}
+                download="Dinith_Rathnayaka_CV.pdf"
+                variant="ghost"
+              >
+                Get CV <Download size={18} />
               </RotatingGradientButton>
             </div>
           </div>
@@ -693,7 +712,7 @@ export default function PortfolioPage() {
             <ProfileScene />
             <div className="absolute bottom-4 left-0 right-0 z-20 mx-auto flex max-w-[260px] items-center gap-2 rounded-lg border border-white/10 bg-slate-800/95 px-4 py-3 shadow-2xl sm:bottom-14 sm:left-auto sm:right-0">
               <Sparkles className="shrink-0 text-amber-300" size={18} />
-              <span>React.js | Node.js | Blogger</span>
+              <span>React | Next.js | Spring Boot</span>
             </div>
           </div>
         </div>
@@ -1164,8 +1183,11 @@ export default function PortfolioPage() {
                   IoT, and product-focused interfaces.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <RotatingGradientButton href="#contact">
-                    Contact Me <Send size={17} />
+                  <RotatingGradientButton
+                    href={cvFile}
+                    download="Dinith_Rathnayaka_CV.pdf"
+                  >
+                    Get CV <Download size={17} />
                   </RotatingGradientButton>
                   <RotatingGradientButton href="#projects" variant="ghost">
                     View Work <ArrowUpRight size={17} />
