@@ -6,7 +6,6 @@ import ProfileScene from "@/components/profile-scene";
 import { Timeline } from "@/components/ui/timeline";
 import { StarfieldBackground } from "@/components/ui/starfield";
 import {
-  ArrowUp,
   ArrowUpRight,
   AtSign,
   BookOpen,
@@ -25,7 +24,6 @@ import {
   Send,
   Server,
   Sparkles,
-  Users,
   Wrench,
   X,
 } from "lucide-react";
@@ -96,6 +94,32 @@ function FacebookIcon({ size = 20, className = "" }) {
   );
 }
 
+function CanvaIcon({ size = 18, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="canvaIconGradient" x1="3" x2="21" y1="4" y2="20">
+          <stop offset="0" stopColor="#00C4CC" />
+          <stop offset="0.5" stopColor="#7D2AE8" />
+          <stop offset="1" stopColor="#00C4CC" />
+        </linearGradient>
+      </defs>
+      <circle cx="12" cy="12" fill="url(#canvaIconGradient)" r="10" />
+      <path
+        d="M13.15 16.55c-2.95 0-5.05-1.9-5.05-4.55s2.1-4.55 5.05-4.55c1.68 0 3.05.62 3.88 1.75l-1.72 1.42c-.54-.68-1.22-1.02-2.04-1.02-1.48 0-2.5.98-2.5 2.4s1.02 2.4 2.5 2.4c.82 0 1.5-.34 2.04-1.02l1.72 1.42c-.83 1.13-2.2 1.75-3.88 1.75Z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
 const navItems = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
@@ -109,9 +133,9 @@ const navItems = [
 
 const highlights = [
   { value: "3.89", label: "Current CGPA" },
-  { value: "7", label: "Featured projects" },
-  { value: "6", label: "Technical articles" },
-  { value: "5", label: "Events and showcases" },
+  { value: "6", label: "Featured projects" },
+  { value: "10+", label: "Technical articles" },
+  { value: "5+", label: "Events and showcases" },
 ];
 
 const education = [
@@ -140,51 +164,70 @@ const education = [
 
 const skills = [
   {
-    title: "Front-End",
-    icon: Code2,
-    iconClass: "text-teal-300",
-    accent: "from-teal-500/10 to-cyan-500/10",
-    items: [
-      { name: "React",      logo: "https://cdn.simpleicons.org/react/61DAFB" },
-      { name: "Next.js",    logo: "https://cdn.simpleicons.org/nextdotjs/ffffff" },
-      { name: "HTML5",      logo: "https://cdn.simpleicons.org/html5/E34F26" },
-      { name: "CSS3",       logo: "https://cdn.simpleicons.org/css3/1572B6" }
-    ],
-  },
-  {
-    title: "Back-End",
-    icon: Server,
-    iconClass: "text-amber-300",
-    accent: "from-amber-500/10 to-orange-500/10",
-    items: [
-      { name: "Node.js",   logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
-      { name: "Express",   logo: "https://cdn.simpleicons.org/express/ffffff" },
-      { name: "PHP",       logo: "https://cdn.simpleicons.org/php/777BB4" },
-      { name: "Laravel",   logo: "https://cdn.simpleicons.org/laravel/FF2D20" },
-    ],
-  },
-  {
     title: "Languages",
     icon: Brain,
     iconClass: "text-rose-300",
     accent: "from-rose-500/10 to-pink-500/10",
     items: [
-      { name: "C",      logo: "https://cdn.simpleicons.org/c/A8B9CC" },
-      { name: "C++",    logo: "https://cdn.simpleicons.org/cplusplus/00599C" },
+      { name: "C", logo: "https://cdn.simpleicons.org/c/A8B9CC" },
+      { name: "Java", logo: "https://cdn.simpleicons.org/openjdk/ED8B00" },
+      { name: "PHP", logo: "https://cdn.simpleicons.org/php/777BB4" },
+      { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
       { name: "Python", logo: "https://cdn.simpleicons.org/python/3776AB" },
-      { name: "Java",   logo: "https://cdn.simpleicons.org/openjdk/ED8B00" },
-      { name: "JavaScript",logo: "https://cdn.simpleicons.org/javascript/F7DF1E" }
     ],
   },
   {
-    title: "Databases",
+    title: "Web and Mobile",
+    icon: Code2,
+    iconClass: "text-teal-300",
+    accent: "from-teal-500/10 to-cyan-500/10",
+    items: [
+      { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB" },
+      { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/ffffff" },
+      { name: "React Native", logo: "https://cdn.simpleicons.org/react/61DAFB" },
+      { name: "Spring Boot", logo: "https://cdn.simpleicons.org/springboot/6DB33F" },
+      { name: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+    ],
+  },
+  {
+    title: "Back-End and APIs",
+    icon: Server,
+    iconClass: "text-amber-300",
+    accent: "from-amber-500/10 to-orange-500/10",
+    items: [
+      { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
+      { name: "Express.js", logo: "https://cdn.simpleicons.org/express/ffffff" },
+      { name: "Spring Boot", logo: "https://cdn.simpleicons.org/springboot/6DB33F" },
+      { name: "Google Maps API", logo: "https://cdn.simpleicons.org/googlemaps/4285F4" },
+    ],
+  },
+  {
+    title: "Databases and ORMs",
     icon: Database,
     iconClass: "text-violet-300",
     accent: "from-violet-500/10 to-purple-500/10",
     items: [
-      { name: "MySQL",    logo: "https://cdn.simpleicons.org/mysql/4479A1" },
-      { name: "MongoDB",  logo: "https://cdn.simpleicons.org/mongodb/47A248" },
+      { name: "MySQL", logo: "https://cdn.simpleicons.org/mysql/4479A1" },
+      { name: "PostgreSQL", logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
+      { name: "MongoDB", logo: "https://cdn.simpleicons.org/mongodb/47A248" },
       { name: "Firebase", logo: "https://cdn.simpleicons.org/firebase/FFCA28" },
+      { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase/3FCF8E" },
+      { name: "Prisma", logo: "https://cdn.simpleicons.org/prisma/ffffff" },
+      { name: "SQLite", logo: "https://cdn.simpleicons.org/sqlite/003B57" },
+    ],
+  },
+  {
+    title: "DevOps and Cloud",
+    icon: Cpu,
+    iconClass: "text-sky-300",
+    accent: "from-sky-500/10 to-blue-500/10",
+    items: [
+      { name: "Git", logo: "https://cdn.simpleicons.org/git/F05032" },
+      { name: "GitHub", logo: "https://cdn.simpleicons.org/github/ffffff" },
+      { name: "Docker", logo: "https://cdn.simpleicons.org/docker/2496ED" },
+      { name: "Vercel", logo: "https://cdn.simpleicons.org/vercel/ffffff" },
+      { name: "Render", logo: "https://cdn.simpleicons.org/render/46E3B7" },
+      { name: "Railway", logo: "https://cdn.simpleicons.org/railway/ffffff" },
     ],
   },
   {
@@ -193,22 +236,11 @@ const skills = [
     iconClass: "text-emerald-300",
     accent: "from-emerald-500/10 to-teal-500/10",
     items: [
-      { name: "Figma",       logo: "https://cdn.simpleicons.org/figma/F24E1E" },
-      { name: "Git",         logo: "https://cdn.simpleicons.org/git/F05032" },
-      { name: "VS Code",     logo: "https://cdn.simpleicons.org/visualstudiocode/007ACC" },
-      { name: "Tailwind CSS",logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
-    ],
-  },
-  {
-    title: "Collaboration",
-    icon: Users,
-    iconClass: "text-sky-300",
-    accent: "from-sky-500/10 to-blue-500/10",
-    items: [
-      { name: "Communication", logo: null },
-      { name: "Leadership",    logo: null },
-      { name: "Teamwork",      logo: null },
-      { name: "Presentation",  logo: null },
+      { name: "Postman", logo: "https://cdn.simpleicons.org/postman/FF6C37" },
+      { name: "Figma", logo: "https://cdn.simpleicons.org/figma/F24E1E" },
+      { name: "Canva", icon: CanvaIcon },
+      { name: "MySQL Workbench", logo: "https://cdn.simpleicons.org/mysql/4479A1" },
+      { name: "Hugging Face", logo: "https://cdn.simpleicons.org/huggingface/FFD21E" },
     ],
   },
 ];
@@ -239,9 +271,6 @@ function AboutCard({ item }) {
     <article className="group relative isolate overflow-hidden rounded-3xl border border-white/10 bg-white/[0.015] px-6 py-7 shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
       {/* Dynamic hover background glow */}
       <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${item.accent} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-[0.06]`} />
-      
-      {/* Decorative top highlight line */}
-      <div className="pointer-events-none absolute left-6 right-6 top-1 h-px bg-white/20 transition-all duration-300 group-hover:bg-white/40" />
 
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
@@ -273,62 +302,52 @@ function AboutCardsList({ items }) {
 
 const projects = [
   {
-    title: "The Burger Barn",
-    image: "/project1.png",
-    description: "A fast, playful front-end restaurant page with a focused ordering experience.",
-    stack: ["HTML", "JavaScript", "Tailwind CSS"],
-    status: "Completed",
-    repo: "https://github.com/dinithrathnayaka23/burgerbarn.github.io",
-    live: "https://burgerbarn-github-io.vercel.app/",
-  },
-  {
-    title: "Server Room Monitoring System",
-    image: "/project2.jpg",
-    description: "ESP32-based IoT monitoring for temperature, humidity, and room conditions.",
-    stack: ["React", "CSS", "JavaScript", "IoT"],
-    status: "Completed",
-    repo: "https://github.com/dinithrathnayaka23/Hardware_Frontend",
-    live: "https://serverroomsystem.web.app/",
-  },
-  {
-    title: "BrainBuzz",
-    image: "/project3.png",
-    description: "A quiz application designed for Advanced Level Physics practice.",
-    stack: ["HTML", "JavaScript", "Tailwind CSS"],
-    status: "Completed",
-    repo: "https://github.com/dinithrathnayaka23/physicsquiz.dinith.io",
-    live: "https://physicsquiz-dinith-io.vercel.app/",
-  },
-  {
-    title: "Bite2Go",
-    image: "/project4.png",
-    description: "A food ordering interface design explored through Figma prototypes.",
-    stack: ["Figma", "UI Design"],
-    status: "Completed",
-    live: "https://www.figma.com/design/tcL7CUeZN0VKfzRuBnDsUF/Scope-Project?node-id=0-1&p=f&t=nXMapdWnFr5qiYc6-0",
-  },
-  {
-    title: "Portfolio 1.0",
-    image: "/project5.png",
-    description: "The first version of the personal portfolio, now rebuilt into this Next.js experience.",
-    stack: ["React", "CSS"],
-    status: "Completed",
-    repo: "https://github.com/dinithrathnayaka23/DinithRathnayaka.io",
-    live: "https://dinithrathnayaka23.github.io/DinithRathnayaka.io/",
-  },
-  {
-    title: "Harmony Hub",
-    image: "/project6.png",
-    description: "An interactive music web app concept with playlist and discovery workflows.",
-    stack: ["React", "Tailwind CSS", "PHP", "MySQL"],
+    title: "TrackNGo",
+    description:
+      "A transport management platform for private bus organizations, designed to streamline route management, bookings, and real-time tracking while improving operational efficiency and user experience.",
+    stack: ["React", "React Native", "Google Maps API", "Spring Boot", "MySQL"],
     status: "In progress",
+    repo: "https://github.com/dinithrathnayaka23/TrackNGo/tree/development",
   },
   {
-    title: "Medixia",
-    image: "/project7.png",
-    description: "A personalized healthcare web application concept focused on useful daily support.",
-    stack: ["React", "CSS", "Firebase"],
-    status: "In progress",
+    title: "FIT23HUB",
+    description:
+      "An academic collaboration platform with AI-powered learning assistance, resource and video sharing, secure authentication, and centralized student services.",
+    stack: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Prisma", "Hugging Face"],
+    status: "Completed",
+    repo: "https://github.com/dinithrathnayaka23/fit23hub.io",
+  },
+  {
+    title: "MotherLanka",
+    description:
+      "A tourism platform showcasing Sri Lanka's destinations, culture, heritage, and travel experiences through an attractive responsive interface.",
+    stack: ["React", "Node.js", "Express.js", "SQLite"],
+    status: "Completed",
+    repo: "https://github.com/dinithrathnayaka23/MotherLanka.github.io/tree/main",
+  },
+  {
+    title: "Helora Leather Website",
+    description:
+      "A marketing website for a small-scale leather business, focused on brand visibility, customer engagement, interactive product showcases, and streamlined inquiry management.",
+    stack: ["Next.js", "Tailwind CSS", "Three.js", "Nodemailer"],
+    status: "Completed",
+    live: "https://helora-com.vercel.app/",
+  },
+  {
+    title: "IEEE WIE Website",
+    description:
+      "A modern responsive website for IEEE Women in Engineering, strengthening community engagement, showcasing initiatives and events, and improving the organization's digital presence.",
+    stack: ["Next.js", "Tailwind CSS", "Vercel"],
+    status: "Completed",
+    live: "https://wie-website.vercel.app/",
+  },
+  {
+    title: "Dinith Portfolio",
+    description:
+      "The personal portfolio website linked from the CV, presenting profile, projects, skills, writing, and contact information in a polished web experience.",
+    stack: ["Next.js", "React", "Tailwind CSS", "Three.js"],
+    status: "Completed",
+    live: "https://dinith-portfolio-chi.vercel.app/",
   },
 ];
 
@@ -606,7 +625,7 @@ export default function PortfolioPage() {
         <div className="relative z-10">
       <header className="sticky top-0 z-50 px-3 py-4 sm:px-6">
         <div className="relative mx-auto max-w-6xl">
-          <div className="relative isolate flex min-h-16 items-center justify-between overflow-hidden rounded-2xl border border-white/15 bg-white/[0.075] px-3 shadow-[0_18px_70px_rgba(0,0,0,0.34),0_0_55px_rgba(50,167,255,0.18)] backdrop-blur-2xl before:absolute before:inset-px before:-z-10 before:rounded-[15px] before:bg-[linear-gradient(115deg,rgba(255,255,255,0.24),rgba(255,255,255,0.04)_34%,rgba(50,167,255,0.14)_68%,rgba(255,255,255,0.16))] before:opacity-80 before:content-[''] after:pointer-events-none after:absolute after:left-4 after:right-4 after:top-1 after:h-px after:bg-white/45 after:content-[''] sm:px-4">
+          <div className="relative isolate flex min-h-16 items-center justify-between overflow-hidden rounded-2xl border border-white/15 bg-white/[0.075] px-3 shadow-[0_18px_70px_rgba(0,0,0,0.34),0_0_55px_rgba(50,167,255,0.18)] backdrop-blur-2xl before:absolute before:inset-px before:-z-10 before:rounded-[15px] before:bg-[linear-gradient(115deg,rgba(255,255,255,0.24),rgba(255,255,255,0.04)_34%,rgba(50,167,255,0.14)_68%,rgba(255,255,255,0.16))] before:opacity-80 before:content-[''] sm:px-4">
             <a
               className="group relative flex min-w-0 items-center gap-3"
               href="#home"
@@ -695,7 +714,7 @@ export default function PortfolioPage() {
               
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <RotatingGradientButton href="#projects">
+              <RotatingGradientButton href="https://github.com/dinithrathnayaka23" target={"_blank"}>
                 View Work <ArrowUpRight size={18} />
               </RotatingGradientButton>
               <RotatingGradientButton
@@ -723,7 +742,6 @@ export default function PortfolioPage() {
               className="animated-glass-border relative isolate min-h-32 overflow-hidden rounded-lg border border-white/10 bg-white/[0.025] px-5 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_18px_54px_rgba(0,0,0,0.24),0_0_24px_rgba(50,167,255,0.08)] backdrop-blur-2xl"
               key={item.label}
             >
-              <div className="pointer-events-none absolute left-4 right-4 top-1 h-px bg-white/45" />
               <div className="relative">
                 <strong className="block text-3xl font-black leading-none text-teal-300 drop-shadow-[0_0_18px_rgba(45,212,191,0.24)]">
                   {item.value}
@@ -764,8 +782,6 @@ export default function PortfolioPage() {
               title: item.time,
               content: (
                 <article className="group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-white/[0.015] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20">
-                  {/* Decorative top line */}
-                  <div className="pointer-events-none absolute left-5 right-5 top-1 h-px bg-white/15 group-hover:bg-white/30 transition-colors duration-300" />
                   {/* Index badge */}
                   <span className="mb-4 inline-grid h-8 w-8 place-items-center rounded-lg bg-amber-300 text-xs font-black text-neutral-950 shadow-[0_0_16px_rgba(251,191,36,0.35)]">
                     {String(index + 1).padStart(2, "0")}
@@ -784,7 +800,7 @@ export default function PortfolioPage() {
           <SectionHeader
             eyebrow="Skills"
             title="Stack and strengths"
-            text="A focused mix of front-end, back-end, database, design, and collaboration skills."
+            text="A CV-backed stack across languages, web and mobile, back-end APIs, data, cloud, and daily tooling."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skills.map((group) => {
@@ -819,6 +835,8 @@ export default function PortfolioPage() {
                               className="h-[18px] w-[18px] object-contain"
                               loading="lazy"
                             />
+                          ) : item.icon ? (
+                            <item.icon className="h-[18px] w-[18px] shrink-0" size={18} />
                           ) : (
                             <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/10 text-[9px] font-black text-slate-300">
                               {item.name.slice(0, 2).toUpperCase()}
@@ -843,7 +861,7 @@ export default function PortfolioPage() {
           <SectionHeader
             eyebrow="Projects"
             title="Selected work"
-            text="A mix of web interfaces, IoT dashboards, product prototypes, and active concepts."
+            text="Six CV-backed projects with their embedded GitHub and live site links."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
@@ -852,7 +870,6 @@ export default function PortfolioPage() {
                 key={project.title}
                 data-reveal
               >
-                <div className="pointer-events-none absolute inset-x-6 top-1 h-px bg-white/20 transition-colors duration-300 group-hover:bg-white/40" />
                 <div className="mb-6 flex items-start justify-between gap-4">
                   <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-slate-300">
                     Project
@@ -868,7 +885,7 @@ export default function PortfolioPage() {
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col text-center">
+                <div className="flex flex-1 flex-col text-justify">
                   <h3 className="text-xl font-semibold tracking-tight text-white">
                     {project.title}
                   </h3>
@@ -1247,11 +1264,8 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-5 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-8 border-t border-white/10 pt-5 text-sm text-slate-500">
               <p>&copy; {new Date().getFullYear()} Dinith Rathnayaka. All rights reserved.</p>
-              <a className="inline-flex items-center gap-2 font-bold text-slate-400 transition hover:text-cyan-200" href="#home">
-                Back to top <ArrowUp size={16} />
-              </a>
             </div>
           </div>
         </div>
